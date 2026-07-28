@@ -7,6 +7,7 @@ public class Matrix {
     private final boolean isSquare;
 
     //To do:
+    //second constructor
     //addition/subtraction methods
     //multiplication methods (arith & linear)
     //division methods
@@ -37,6 +38,72 @@ public class Matrix {
         this.col = col;
         this.matrixData = new double[row][col];
         this.isSquare = row == col;
+    }
+    public Matrix(double[]... m) {
+        this.row = m.length;
+        int colLen = 0;
+        for (int i = 0; i < m.length; i++){
+            colLen = Math.max(colLen, m[i].length);
+        }
+        this.col = colLen;
+        this.matrixData = m;
+        this.isSquare = row == col;
+    }
+
+    public Matrix add(Matrix b){
+        Matrix nm = new Matrix(this.row, this.col);
+        if (this.row != b.row || this.col != b.col){
+            throw new IllegalArgumentException("Matrix dimensions are not equal");
+        }
+        else{
+            for (int i = 0; i < this.row; i++){
+                for (int j = 0; j < this.col; j++){
+                    nm.matrixData[i][j] = this.matrixData[i][j] + b.matrixData[i][j];
+                }
+            }
+        }
+        return nm;
+    }
+    public static Matrix add(Matrix a, Matrix b){
+        Matrix nm = new Matrix(this.row, this.col);
+        if (a.row != b.row || a.col != b.col){
+            throw new IllegalArgumentException("Matrix dimensions are not equal");
+        }
+        else{
+            for (int i = 0; i < a.row; i++){
+                for (int j = 0; j < a.col; j++){
+                    nm.matrixData[i][j] = a.matrixData[i][j] + b.matrixData[i][j];
+                }
+            }
+        }
+        return nm;
+    }
+
+    //static addition methods for adding matrices in place, saving space and not preserving
+    //original matrix
+    public void staticadd(Matrix b){
+        if (this.row != this.row || this.col != this.col){
+            throw new IllegalArgumentException("Matrix dimensions are not equal");
+        }
+        else{
+            for(int i = 0; i < this.row; i++){
+                for(int j = 0; j < this.col; j++){
+                    this.matrixData[i][j] += b.matrixData[i][j];
+                } 
+            }
+        }
+    }
+    public static void staticadd(Matrix a, Matrix b){
+        if (a.row != b.row || a.col != b.col){
+            throw new IllegalArgumentException("Matrix dimensions are not equal");
+        }
+        else{
+            for(int i = 0; i < a.row; i++){
+                for(int j = 0; j < a.col; j++){
+                    a.matrixData[i][j] += b.matrixData[i][j];
+                } 
+            }
+        }
     }
 
     public String toString() {
