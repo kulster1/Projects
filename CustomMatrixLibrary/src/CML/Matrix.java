@@ -3,12 +3,11 @@ package CML;
 public class Matrix {
     private final int row;
     private final int col;
-    private final double[][] matrixData;
+    private double[][] matrixData;
     private final boolean isSquare;
 
     //To do:
-    //second constructor
-    //addition/subtraction methods
+    //set value
     //multiplication methods (arith & linear)
     //division methods
     //transpose
@@ -79,10 +78,39 @@ public class Matrix {
         return nm;
     }
 
-    //static addition methods for adding matrices in place, saving space and not preserving
+    public Matrix sub(Matrix b){
+        Matrix nm = new Matrix(this.row, this.col);
+        if (this.row != b.row || this.col != b.col){
+            throw new IllegalArgumentException("Matrix dimensions are not equal");
+        }
+        else{
+            for (int i = 0; i < this.row; i++){
+                for (int j = 0; j < this.col; j++){
+                    nm.matrixData[i][j] = this.matrixData[i][j] - b.matrixData[i][j];
+                }
+            }
+        }
+        return nm;
+    }
+    public static Matrix sub(Matrix a, Matrix b){
+        Matrix nm = new Matrix(this.row, this.col);
+        if (a.row != b.row || a.col != b.col){
+            throw new IllegalArgumentException("Matrix dimensions are not equal");
+        }
+        else{
+            for (int i = 0; i < a.row; i++){
+                for (int j = 0; j < a.col; j++){
+                    nm.matrixData[i][j] = a.matrixData[i][j] - b.matrixData[i][j];
+                }
+            }
+        }
+        return nm;
+    }
+
+    //static addition/subtraction methods for adding matrices in place, saving space and not preserving
     //original matrix
     public void staticadd(Matrix b){
-        if (this.row != this.row || this.col != this.col){
+        if (this.row != b.row || this.col != b.col){
             throw new IllegalArgumentException("Matrix dimensions are not equal");
         }
         else{
@@ -104,6 +132,42 @@ public class Matrix {
                 } 
             }
         }
+    }
+
+    public void staticsub(Matrix b){
+        if (this.row != b.row || this.col != b.col){
+            throw new IllegalArgumentException("Matrix dimensions are not equal");
+        }
+        else{
+            for(int i = 0; i < this.row; i++){
+                for(int j = 0; j < this.col; j++){
+                    this.matrixData[i][j] -= b.matrixData[i][j];
+                } 
+            }
+        }
+    }
+    public static void staticsub(Matrix a, Matrix b){
+        if (a.row != b.row || a.col != b.col){
+            throw new IllegalArgumentException("Matrix dimensions are not equal");
+        }
+        else{
+            for(int i = 0; i < a.row; i++){
+                for(int j = 0; j < a.col; j++){
+                    a.matrixData[i][j] -= b.matrixData[i][j];
+                } 
+            }
+        }
+    }
+
+    public void set(int x, int y, int value){
+        this.matrixData[x][y] = value;
+    }
+    public double get(int x, int y){
+        return this.matrixData[x][y];
+    }
+
+    public void clear(){
+        this.matrixData = new double[this.row][this.col];
     }
 
     public String toString() {

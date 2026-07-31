@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <link rel="stylesheet" href="style.css">
+        <meta charset="UTF-8">
+        <title>Caleb</title>
+        
+    </head>
+    <div class="topnav">
+            <a href="#">Home</a> |
+            <a href="#">Contact</a> |
+            <a href="#">Projects</a> |
+        </nav>
+    <body>
+        <div>
+        <h1>This is Caleb</h1>
+        </div>
+        <div class="intro">
+            <p>...And apparently, I should make a 
+            website about myself, so I'm going to build and style this website 
+            from scratch.</p>
+            <p>Still wondering exactly what I should put in it, but I guess the 
+                idea is that this is like a cool resume.
+            </p>
+            <p>I did <em>not</em> use wordpress, and I'm wondering if that's 
+            necessarily a thing that's looked good upon or if it doesn't matter 
+            in the current job market but I'm guessing that this is good for proving 
+            (at least to myself) that I understand at least some <b>basic</b> web
+            design.</p>
+            <p>Or maybe I'm just stubborn and am succumbing to the sunken cost fallacy with regards to my degree.
+            </p>
+            <div class="selfsummary">
+                <h1 id="ssh1">Who am I?</h1>
+                <p id="ssc1">I am a current Computer Science student, with a focus in business. Beyond that, however,
+                    I am a person whose goal is to have a hand in meaningful work.
+                </p>
+                <p id ="ssc2">I believe that the impact of my work should long outlive the name associated with it.</p>
+            </div>
+        </div>
+        <div class="details">
+            <h2><em>Stats:</em></h2>
+            <div class="edu">
+            <h3>Education</h3>
+            </div>
+        </div>
+    </body>
+</html>
