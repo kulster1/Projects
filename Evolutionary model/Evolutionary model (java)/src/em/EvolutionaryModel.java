@@ -17,7 +17,8 @@ import java.util.*;
 //Later: add functionality for more parents
 
 public class EvolutionaryModel {
-    final String validChars = "abcdefghifklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890!?-,'.; ";
+    private final String validChars = "abcdefghifklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890!?-,'.; ";
+    private Random r = new Random();
 
     public void evolutionaryModel(String m, int genSize, double mutChance){
         String[] genePool = new String[genSize];
@@ -26,7 +27,6 @@ public class EvolutionaryModel {
         String parent2 = "";
         double p2m = 0;
         StringBuilder b = new StringBuilder(m.length());
-        Random r = new Random();
 
         //Generate first generation
         for(int i = 0; i < genePool.length; i++){
@@ -83,13 +83,8 @@ public class EvolutionaryModel {
         }
     }
     private String mutate(String m){
-        StringBuilder coder = new StringBuilder(m.length());
-        Random r = new Random();
-        String[] map = m.split("");
-        map[r.nextInt(map.length)] = String.valueOf(validChars.charAt(r.nextInt(validChars.length())));
-        for(int i = 0; i < map.length; i++){
-            coder.append(map[i]);
-        }
-        return coder.toString();
+        char[] map = m.toCharArray();
+        map[r.nextInt(map.length)] = validChars.charAt(r.nextInt(validChars.length()));
+        return new String(map);
     }    
 }
