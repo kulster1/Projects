@@ -13,23 +13,6 @@ public class Matrix {
     //transpose
     //rotate
     //flip
-    //determinant calculation
-        //determinant calculation is recursive
-        //uses helper formula to get submatrices
-        //1) return base case 1x1 mat
-        //2) return base case 2x2 mat
-        //3) make total variable = 0
-        //4) make sign variable = 1
-        //5) along first row, get submatrix at each step using helper function
-        //6) multiple current matrix by the sign then the determinant of 
-        //   submatrix (this is where the recursion begins)
-        //7) set sign equal to negative sign at each step to flip sign
-        //8) return total (double)
-        // In helper function:
-        //9) Helper function should return matrix of size n-1, n being size of current matrix, so
-        //   we initialize new matrix of size n-1
-        //   *takes in inputs: current matrix, excluded row number, excluded column number, current matrix size
-        //10) runs a nested loop, directly inputting values that are not in excluded row, columns
     //isInvertable
 
     public Matrix(int row, int col) {
@@ -37,6 +20,12 @@ public class Matrix {
         this.col = col;
         this.matrixData = new double[row][col];
         this.isSquare = row == col;
+    }
+    public Matrix(int size) {
+        this.row = size;
+        this.col = size;
+        this.matrixData = new double[size][size];
+        this.isSquare = true;
     }
     public Matrix(double[]... m) {
         this.row = m.length;
@@ -169,6 +158,46 @@ public class Matrix {
     public void clear(){
         this.matrixData = new double[this.row][this.col];
     }
+
+        //]Determinant calculator using Laplacian Expansion
+        public static double determinant(Matrix m){
+            //Sets base cases. Will return singular value for a matrix of size 1, and will return
+            // ad-bc for matrix of size 2
+            if(m.row == 1 && m.col == 1) return (double) m.matrixData[0][0];
+            if(m.row == 2 && m.col == 2) return (double) (m.matrixData[0][0] * m.matrixData[1][1]) - (m.matrixData[0][1] * m.matrixData[1][0]);
+
+            //sets total variable, which is the determinant for each submatrix
+            double total = 0;
+            //sign that flips with each iteration
+            double sign = 1;
+
+            //For every variable along first row of the matrix, gets the submatrix from excluding
+            //that row and column, then multiplies the value at each step by the determinant
+            //of its submatrix and the sign.
+            //Flips sign for next iteration
+            for(int i = 0; i < m.col; i++){
+                Matrix sub = submatrix(m, 0, i, m.row);
+                total += (sign * m.matrixData[0][i]) * determinant(sub);
+                sign = -sign;
+            }
+            return total;
+        }
+        private static Matrix submatrix(Matrix m, int r, int c, int n){
+            Matrix sub = new Matrix(n-1);
+            int p = 0;
+            for (int i = 0; i < n; i++){
+                if (i == r) continue;
+                int q = 0;
+                for (int j = 0; j < n; j++){
+                    if (j == c) continue;
+                    sub.matrixData[p][q] = (m.matrixData[i][j]);
+                    q++;
+                }
+                p++;
+            }
+            return sub;
+        }
+
 
     public String toString() {
         StringBuilder b = new StringBuilder();

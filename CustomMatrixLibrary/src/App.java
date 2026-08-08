@@ -22,6 +22,10 @@ public static void main(String[] args) throws Exception {
         c.staticadd(d);
 
         System.out.println(c);
+
+        System.out.println(d);
+
+        System.out.println(Matrix.determinant(d));
     }
 }
 
